@@ -22,6 +22,11 @@ void dispinit(void);
 void epulse(void);
 void delay_ms(unsigned int de);
 void clear(void);
+void moveCursorRight(void);
+void moveCursorLeft(void);
+void moveCursorUp(void);
+void moveCursorDown(void);
+void enableCursor(void);
 
 //=================================================================
 //        Main Function
@@ -41,6 +46,11 @@ int main(void)
  pinMode('D',3,1);
  int input;
  int input2 = 0;
+ int left_input = 0;
+ int right_input = 0;
+ int up_input = 0;
+ int down_input = 0;
+
   while(1) {
   	//delay_ms(25000);
 	//display("Hello Bocho",2);
@@ -169,4 +179,84 @@ void clear(void) {
 	PORTC &= ~(1<<RS);           // RS=0
  	displaybyte(0x01);
   	PORTC |= 1<<RS;    //RS=1
+}
+
+//=================================================================
+//        Move Cursor Right Function
+// This function is used for move cursor right
+//=================================================================
+void moveCursorRight(void) {
+	PORTC &= ~(1<<RS);           // RS=0
+ 	displaybyte(0x14);
+  	PORTC |= 1<<RS;    			 // RS=1
+	_delay_ms(1);
+
+	PORTC &= ~(1<<RS);           // RS=0
+ 	displaybyte(0x0F);
+  	PORTC |= 1<<RS;    			 // RS=1
+	_delay_ms(1);
+}
+
+//=================================================================
+//        Move Cursor Left Function
+// This function is used for move cursor left
+//=================================================================
+void moveCursorLeft(void) {
+	PORTC &= ~(1<<RS);           // RS=0
+ 	displaybyte(0x10);
+  	PORTC |= 1<<RS;    			 // RS=1
+	_delay_ms(1);
+
+	PORTC &= ~(1<<RS);           // RS=0
+ 	displaybyte(0x0F);
+  	PORTC |= 1<<RS;    			 // RS=1
+	_delay_ms(1);
+}
+
+//=================================================================
+//        Move Cursor Up Function
+// This function is used for move cursor line 2 to line 1
+//=================================================================
+void moveCursorUp(void) {
+	PORTC &= ~(1<<RS);           // RS=0
+ 	displaybyte(0x80);
+  	PORTC |= 1<<RS;    			 // RS=1
+	_delay_ms(1);
+
+	PORTC &= ~(1<<RS);           // RS=0
+ 	displaybyte(0x0F);
+  	PORTC |= 1<<RS;    			 // RS=1
+	_delay_ms(1);
+}
+
+//=================================================================
+//        Move Cursor Down Function
+// This function is used for move cursor line 1 to line 2
+//=================================================================
+void moveCursorDown(void) {
+	PORTC &= ~(1<<RS);           // RS=0
+ 	displaybyte(0xC0);
+  	PORTC |= 1<<RS;    			 // RS=1
+	_delay_ms(1);
+
+	PORTC &= ~(1<<RS);           // RS=0
+ 	displaybyte(0x0F);
+  	PORTC |= 1<<RS;    			 // RS=1
+	_delay_ms(1);
+}
+
+//=================================================================
+//       Enable Cursor Function
+// This function is used for enable cursor
+//=================================================================
+void enableCursor(void) {
+	PORTC &= ~(1<<RS);           // RS=0
+ 	displaybyte(0x0E);
+  	PORTC |= 1<<RS;    			 // RS=1
+	_delay_ms(1);
+
+	PORTC &= ~(1<<RS);           // RS=0
+ 	displaybyte(0x0F);
+  	PORTC |= 1<<RS;    			 // RS=1
+	_delay_ms(1);
 }
