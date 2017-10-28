@@ -44,6 +44,11 @@ int main(void)
  pinMode('D',5,0);
  pinMode('D',2,0);
  pinMode('D',3,1);
+ pinMode('D',6,0); //For take input move cursor left
+ pinMode('D',7,0); //For take input move cursor right
+ pinMode('D',0,0); //For take input move cursor up 
+ pinMode('D',1,0); //For take input move cursor down
+
  int input;
  int input2 = 0;
  int left_input = 0;
@@ -74,6 +79,34 @@ int main(void)
 	else {
 		digitalWrite('D',3,0);
 		delay_ms(3000);
+	}
+	
+	//Move cursor left
+	left_input = digitalRead('D',6);
+	if(left_input == 1) {
+		moveCursorLeft();
+		_delay_ms(1);
+	}
+
+	//Move cursor right
+	right_input = digitalRead('D',7);
+	if(right_input == 1) {
+		moveCursorRight();
+		_delay_ms(1);
+	}
+
+	//Move cursor up
+	up_input = digitalRead('D',0);
+	if(up_input == 1) {
+		moveCursorUp();
+		_delay_ms(1);
+	}
+
+	//Move cursor down
+	down_input = digitalRead('D',1);
+	if(down_input == 1) {
+		moveCursorDown();
+		_delay_ms(1);
 	}
 
   }
