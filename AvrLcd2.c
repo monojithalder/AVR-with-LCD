@@ -42,7 +42,7 @@ int main(void)
  display(" Hi There....",1);
  display("Circuits4You.com",2);
  pinMode('D',5,0);
- pinMode('D',2,0);
+ pinMode('D',2,0); //For enable cursor
  pinMode('D',3,1);
  pinMode('D',6,0); //For take input move cursor left
  pinMode('D',7,0); //For take input move cursor right
@@ -50,11 +50,11 @@ int main(void)
  pinMode('D',1,0); //For take input move cursor down
 
  int input;
- int input2 = 0;
  int left_input = 0;
  int right_input = 0;
  int up_input = 0;
  int down_input = 0;
+ int cursor_input = 0;
 
   while(1) {
   	//delay_ms(25000);
@@ -71,7 +71,7 @@ int main(void)
 		//display("Circuits4You.com",2);
 	}
 
-	input2 = digitalRead('D',2);
+	/*input2 = digitalRead('D',2);
 	if(input2 == 1) {
 		digitalWrite('D',3,1);
 		delay_ms(3000);
@@ -79,7 +79,7 @@ int main(void)
 	else {
 		digitalWrite('D',3,0);
 		delay_ms(3000);
-	}
+	}*/
 	
 	//Move cursor left
 	left_input = digitalRead('D',6);
@@ -109,6 +109,12 @@ int main(void)
 		_delay_ms(1);
 	}
 
+	//Enable cursor
+	cursor_input = digitalRead('D',2);
+	if(cursor_input == 1) {
+		enableCursor();
+		_delay_ms(1);
+	}
   }
 }
 
