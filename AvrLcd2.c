@@ -85,14 +85,14 @@ int main(void)
 	left_input = digitalRead('D',6);
 	if(left_input == 1) {
 		moveCursorLeft();
-		_delay_ms(1);
+		_delay_ms(100);
 	}
 
 	//Move cursor right
 	right_input = digitalRead('D',7);
 	if(right_input == 1) {
 		moveCursorRight();
-		_delay_ms(1);
+		_delay_ms(100);
 	}
 
 	//Move cursor up
@@ -229,11 +229,6 @@ void moveCursorRight(void) {
  	displaybyte(0x14);
   	PORTC |= 1<<RS;    			 // RS=1
 	_delay_ms(1);
-
-	PORTC &= ~(1<<RS);           // RS=0
- 	displaybyte(0x0F);
-  	PORTC |= 1<<RS;    			 // RS=1
-	_delay_ms(1);
 }
 
 //=================================================================
@@ -243,11 +238,6 @@ void moveCursorRight(void) {
 void moveCursorLeft(void) {
 	PORTC &= ~(1<<RS);           // RS=0
  	displaybyte(0x10);
-  	PORTC |= 1<<RS;    			 // RS=1
-	_delay_ms(1);
-
-	PORTC &= ~(1<<RS);           // RS=0
- 	displaybyte(0x0F);
   	PORTC |= 1<<RS;    			 // RS=1
 	_delay_ms(1);
 }
@@ -261,11 +251,6 @@ void moveCursorUp(void) {
  	displaybyte(0x80);
   	PORTC |= 1<<RS;    			 // RS=1
 	_delay_ms(1);
-
-	PORTC &= ~(1<<RS);           // RS=0
- 	displaybyte(0x0F);
-  	PORTC |= 1<<RS;    			 // RS=1
-	_delay_ms(1);
 }
 
 //=================================================================
@@ -275,11 +260,6 @@ void moveCursorUp(void) {
 void moveCursorDown(void) {
 	PORTC &= ~(1<<RS);           // RS=0
  	displaybyte(0xC0);
-  	PORTC |= 1<<RS;    			 // RS=1
-	_delay_ms(1);
-
-	PORTC &= ~(1<<RS);           // RS=0
- 	displaybyte(0x0F);
   	PORTC |= 1<<RS;    			 // RS=1
 	_delay_ms(1);
 }
